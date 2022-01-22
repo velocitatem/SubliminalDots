@@ -3,6 +3,7 @@ var glob = {
   "count"    : 20,
   "radius"   : 2,
   "duration" : 500,
+  "range"    : 0.4,
   "split"    : true
 }
 var record = {
@@ -18,7 +19,7 @@ function start() {
       ycon = canvas.height;
   var props = getCounts(glob.count);
   var pn = props[0]/glob.count;
-  while(pn <= 0.4 || pn >= 0.6) {
+  while(pn <= glob.range || pn >= 1- glob.range) {
     props = getCounts(glob.count);
     pn = props[0]/glob.count;
   }
