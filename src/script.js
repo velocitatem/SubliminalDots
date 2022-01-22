@@ -5,8 +5,13 @@ var glob = {
   "duration" : 500,
   "split"    : true
 }
-
+var record = {
+  "runs"      : 0,
+  "correct"   : 0,
+  "incorrect" : 0
+}
 function start() {
+  record.runs+=1;
   var canvas = document.getElementById("canvas");
   var ctx = canvas.getContext('2d')
   var xcon = canvas.width,
@@ -33,17 +38,32 @@ function start() {
         res = res.trim();
         var truthVec = pn > 0.5 ? [1,0] : [0,1];
         var inputVec = [res=="r"?1:0, res=="b"?1:0];
-        console.log(truthVec, inputVec);
         if(evalVectors(truthVec, inputVec)) {
           alert("Correct");
+          record.correct++;
         }
         else {
           alert("Incorrect");
-        }
-    }, 800)
+          record.incorrect++;
+        };
+        updateRecord();
+    }, 500)
   }, glob.duration);
 }
 
+function results() {
+  return JSON.stringify({
+    "record"   : record,
+    "settings" : glob
+  })
+}
+
+function updateRecord() {
+  var sum = record.correct + record.incorrect;
+  var per = (record.correct / sum)*100;
+  per = Math.round(per, 2);
+  document.getElementById("per").innerText = per+"%";
+}
 
 function evalVectors(va, vb) {
   if(va[0] == vb[0]) {
