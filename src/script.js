@@ -81,7 +81,7 @@ function drawDot(ctx, pos, color) {
     ctx.fillStyle = color
     ctx.fill();
 }
-
+// add off screen constraint given dot raduius
 function getRandomPosition(xc, yc, side) {
   var x,y;
 
