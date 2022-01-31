@@ -67,6 +67,7 @@ function updateRecord() {
 }
 
 function evalVectors(va, vb) {
+  // good enough
   if(va[0] == vb[0]) {
     return true;
   }
@@ -81,7 +82,7 @@ function drawDot(ctx, pos, color) {
     ctx.fillStyle = color
     ctx.fill();
 }
-// add off screen constraint given dot raduius
+// add off screen constraint
 function getRandomPosition(xc, yc, side) {
   var x,y;
 
